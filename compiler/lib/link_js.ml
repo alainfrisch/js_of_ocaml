@@ -18,6 +18,8 @@ let drop_prefix ~prefix s =
 let _ = drop_prefix ~prefix:"qwe:" "qwe"
 
 let kind ~resolve_sourcemap_url file line =
+  `Other
+    (*
   let s =
     match drop_prefix ~prefix:sourceMappingURL_base64 line with
     | Some base64 ->
@@ -38,6 +40,7 @@ let kind ~resolve_sourcemap_url file line =
     let ic = open_in (Filename.concat base url) in
     let l = in_channel_length ic in
     `Source_map (Yojson.Basic.from_string (really_input_string ic l))
+*)
 ;;
 
 let link ~output ~files ~resolve_sourcemap_url ~source_map =
@@ -72,7 +75,7 @@ let link ~output ~files ~resolve_sourcemap_url ~source_map =
     close_in ic;
     new_line ();
   ) files;
-  match source_map with
+  () (*match source_map with
   | None -> ()
   | Some (file, init_sm) ->
     match Source_map.merge ((0,"",init_sm) :: List.rev !sm) with
@@ -88,4 +91,4 @@ let link ~output ~files ~resolve_sourcemap_url ~source_map =
         let json = Source_map.json sm in
         Yojson.Basic.to_file file json;
         let s = sourceMappingURL ^ file in
-        output_string output s
+        output_string output s *)

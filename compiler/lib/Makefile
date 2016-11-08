@@ -1,6 +1,7 @@
 include ../../Makefile.conf
 
-PACKAGES=compiler-libs base64 yojson
+PACKAGES=compiler-libs
+#base64 yojson
 
 OBJS=compiler_version.cmx \
      util.cmx pretty_print.cmx option.cmx reserved.cmx varPrinter.cmx \

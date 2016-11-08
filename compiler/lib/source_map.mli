@@ -38,6 +38,17 @@ type t = {
   mutable mappings : mapping ;
 }
 
-val json : t -> Yojson.Basic.json
-val of_json : Yojson.Basic.json -> t
+type json = [ `Assoc of (string * json) list
+       | `Bool of bool
+       | `Float of float
+       | `Int of int
+       | `Intlit of string
+       | `List of json list
+       | `Null
+       | `String of string
+       | `Tuple of json list
+       | `Variant of string * json option ]
+
+val json : t -> json
+val of_json : json -> t
 val merge : (int * string * t) list -> t option

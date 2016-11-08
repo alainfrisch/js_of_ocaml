@@ -1056,6 +1056,7 @@ let program f ?source_map p =
     end) in
   PP.set_needed_space_function f need_space;
   PP.start_group f 0; O.program f p; PP.end_group f; PP.newline f;
+  (*
   (match source_map with
    | None -> ()
    | Some (out_file,sm) ->
@@ -1112,6 +1113,7 @@ let program f ?source_map p =
      in
      PP.newline f;
      PP.string f (Printf.sprintf "//# sourceMappingURL=%s" urlData));
+  *)
   if stats ()
   then begin
     let size i =

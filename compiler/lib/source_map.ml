@@ -189,6 +189,18 @@ let () =
   (* let map' = mapping_of_string map_str' in *)
   assert (map_str = map_str')
 
+type json = [ `Assoc of (string * json) list
+       | `Bool of bool
+       | `Float of float
+       | `Int of int
+       | `Intlit of string
+       | `List of json list
+       | `Null
+       | `String of string
+       | `Tuple of json list
+       | `Variant of string * json option ]
+
+
 let json t =
   `Assoc [
      "version",       `Float  (float_of_int t.version);

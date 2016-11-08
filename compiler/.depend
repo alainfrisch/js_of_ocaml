@@ -1,16 +1,18 @@
-commonArg.cmo : commonArg.cmi
-commonArg.cmx : commonArg.cmi
-compileArg.cmo : commonArg.cmi compileArg.cmi
-compileArg.cmx : commonArg.cmx compileArg.cmi
-compileArg.cmi : commonArg.cmi
-jsoo_compile.cmo : compileArg.cmi commonArg.cmi
-jsoo_compile.cmx : compileArg.cmx commonArg.cmx
-jsoo_link.cmo : linkerArg.cmo
-jsoo_link.cmx : linkerArg.cmx
-linkerArg.cmo :
-linkerArg.cmx :
-minifyArg.cmo : commonArg.cmi minifyArg.cmi
-minifyArg.cmx : commonArg.cmx minifyArg.cmi
-minifyArg.cmi : commonArg.cmi
-minify.cmo : minifyArg.cmi commonArg.cmi
-minify.cmx : minifyArg.cmx commonArg.cmx
+cmdliner.cmo : cmdliner.cmi
+cmdliner.cmx : cmdliner.cmi
+commonArg.cmo : cmdliner.cmi commonArg.cmi
+commonArg.cmx : cmdliner.cmx commonArg.cmi
+compileArg.cmo : commonArg.cmi cmdliner.cmi compileArg.cmi
+compileArg.cmx : commonArg.cmx cmdliner.cmx compileArg.cmi
+compileArg.cmi : commonArg.cmi cmdliner.cmi
+jsoo_compile.cmo : compileArg.cmi commonArg.cmi cmdliner.cmi
+jsoo_compile.cmx : compileArg.cmx commonArg.cmx cmdliner.cmx
+jsoo_link.cmo : linkerArg.cmo cmdliner.cmi
+jsoo_link.cmx : linkerArg.cmx cmdliner.cmx
+linkerArg.cmo : cmdliner.cmi
+linkerArg.cmx : cmdliner.cmx
+minify.cmo : minifyArg.cmi commonArg.cmi cmdliner.cmi
+minify.cmx : minifyArg.cmx commonArg.cmx cmdliner.cmx
+minifyArg.cmo : commonArg.cmi cmdliner.cmi minifyArg.cmi
+minifyArg.cmx : commonArg.cmx cmdliner.cmx minifyArg.cmi
+minifyArg.cmi : commonArg.cmi cmdliner.cmi

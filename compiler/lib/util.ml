@@ -497,5 +497,5 @@ let rec find_loc_in_summary name ident' = function
   | Env.Env_cltype (summary, _, _)
   | Env.Env_open (summary, _)
   | Env.Env_functor_arg (summary, _)
-  | Env.Env_constraints (summary, _)
+(*  | Env.Env_constraints (summary, _) *)
    -> find_loc_in_summary name ident' summary

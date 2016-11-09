@@ -16,8 +16,10 @@ OBJS=compiler_version.cmx \
      generate_closure.cmx generate.cmx driver.cmx \
      pseudoFs.cmx link_js.cmx
 
-OCAMLC=ocamlfind ocamlc -g  -w +A-4-7-9-37-38-41-44-45-58
-OCAMLOPT=ocamlfind ocamlopt -g -w +A-4-7-9-37-38-41-44-45-58
+OCAMLC=ocamlc -g  -w +A-4-7-9-37-38-41-44-45-58
+OCAMLOPT=ocamlopt -g -w +A-4-7-9-37-38-41-44-45-58
+#OCAMLC=ocamlfind ocamlc -g  -w +A-4-7-9-37-38-41-44-45-58
+#OCAMLOPT=ocamlfind ocamlopt -g -w +A-4-7-9-37-38-41-44-45-58
 
 all:
 
@@ -49,21 +51,21 @@ compiler_version.ml.tmp:
 	echo "let git_version = \"${VERSION_GIT}\"" >> $@
 
 %.cmx: %.ml
-	$(OCAMLOPT) $(SAFESTRING) ${addprefix -package , $(PACKAGES)} -for-pack Js_of_ocaml_compiler -g -c $<
+	$(OCAMLOPT) $(SAFESTRING) -I +compiler-libs -for-pack Js_of_ocaml_compiler -g -c $<
 
 %.cmo: %.ml
-	$(OCAMLC) $(SAFESTRING) ${addprefix -package , $(PACKAGES)} -c $<
+	$(OCAMLC) $(SAFESTRING) -I +compiler-libs -c $<
 
 %.cmi: %.mli
-	$(OCAMLC) $(SAFESTRING) ${addprefix -package , $(PACKAGES)} -c $<
+	$(OCAMLC) $(SAFESTRING) -I +compiler-libs -c $<
 
-annot_parser.ml: annot_parser.mli
-annot_parser.mli: annot_parser.mly jsoo_primitive.cmi
-	menhir --infer --explain $<
+#annot_parser.ml: annot_parser.mli
+#annot_parser.mli: annot_parser.mly jsoo_primitive.cmi
+#	menhir --infer --explain $<
 
-js_parser.ml: js_parser.mli
-js_parser.mli: js_parser.mly javascript.cmi js_token.cmi
-	menhir --infer --external-tokens Js_token --explain $<
+#js_parser.ml: js_parser.mli
+#js_parser.mli: js_parser.mly javascript.cmi js_token.cmi
+#	menhir --infer --external-tokens Js_token --explain $<
 
 %.ml: %.mll
 	ocamllex -q $<
